@@ -1,0 +1,19 @@
+import { MatchService } from './service/match.service';
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
+import { CreateMatchDto } from './dto/match.dto';
+import { Match } from './entity/match.entity';
+
+@Controller('match')
+export class MatchController {
+  constructor(private readonly matchService: MatchService) {}
+
+  @Get()
+  async findMatchs(@Query() query): Promise<object> {
+    return this.matchService.getMatchs(query.id1, query.id2);
+  }
+
+  @Post()
+  async saveMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
+    return this.matchService.saveMatch(createMatchDto);
+  }
+}
