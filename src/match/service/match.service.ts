@@ -11,8 +11,8 @@ export class MatchService {
   ) {}
 
   async getMatchs(id1: number, id2: number): Promise<object> {
-    const player1 = await this.matchRepository.count({where: {winnerPlayer: id1}});
-    const player2 = await this.matchRepository.count({where: {winnerPlayer: id2}});
+    const player1 = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
+    const player2 = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
 
     return JSON.parse(`{"player1": ${player1}, "player2": ${player2}}`);
   }
