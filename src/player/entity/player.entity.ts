@@ -13,8 +13,8 @@ export class Player {
   lastName: string;
 
   @OneToMany(type => Match, match => match.winnerPlayer)
-  winMatchs: Match[];
+  wonMatches: Match[];
 
   @OneToMany(type => Match, match => match.loserPlayer)
-  loseMatchs: Match[];
+  losedMatches: Match[];
 }
