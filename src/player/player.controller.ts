@@ -9,7 +9,7 @@ export class PlayerController {
 
   @Get()
   async find(@Query() query): Promise<Player> {
-    return this.playerService.findPlayer(query.id1);
+    return this.playerService.findPlayer(query);
   }
 
   @Post()

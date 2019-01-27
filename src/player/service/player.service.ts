@@ -10,8 +10,8 @@ export class PlayerService {
     private readonly playerRepository: Repository<Player>,
   ) {}
 
-  async findPlayer(id: number): Promise<Player> {
-    return await this.playerRepository.findOne(id, {
+  async findPlayer(query: any): Promise<Player> {
+    return await this.playerRepository.findOne({where: {firstName: query.firstName, lastName: query.lastName},
       relations: ['wonMatches', 'losedMatches'],
     });
   }
