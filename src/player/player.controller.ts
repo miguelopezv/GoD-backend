@@ -8,8 +8,8 @@ export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Get()
-  async find(@Query() query): Promise<Player[]> {
-    return this.playerService.findPlayers(query.id1, query.id2);
+  async find(@Query() query): Promise<Player> {
+    return this.playerService.findPlayer(query.id1);
   }
 
   @Post()
