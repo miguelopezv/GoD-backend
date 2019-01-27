@@ -8,8 +8,8 @@ export class MatchController {
   constructor(private readonly matchService: MatchService) {}
 
   @Get()
-  async findMatchs(@Query() query): Promise<object> {
-    return this.matchService.getMatchs(query.id1, query.id2);
+  async findMatches(@Query() query): Promise<object> {
+    return this.matchService.getMatches(query.id1, query.id2);
   }
 
   @Post()

@@ -10,7 +10,7 @@ export class MatchService {
     private readonly matchRepository: Repository<Match>,
   ) {}
 
-  async getMatchs(id1: number, id2: number): Promise<object> {
+  async getMatches(id1: number, id2: number): Promise<object> {
     const player1 = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
     const player2 = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
 
