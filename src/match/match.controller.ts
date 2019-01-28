@@ -16,4 +16,9 @@ export class MatchController {
   async saveMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
     return this.matchService.saveMatch(createMatchDto.body);
   }
+
+  @Get('detail')
+  async matchesDetail(@Query() query): Promise<object> {
+    return this.matchService.getDetailedMatches(query.id1, query.id2, query.page);
+  }
 }
