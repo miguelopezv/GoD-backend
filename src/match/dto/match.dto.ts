@@ -1,4 +1,6 @@
 export class CreateMatchDto {
-  readonly winnerPlayer: number;
-  readonly loserPlayer: number;
+  body: {
+    readonly winnerPlayer: number;
+    readonly loserPlayer: number;
+  };
 }
