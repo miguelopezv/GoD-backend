@@ -11,10 +11,19 @@ export class MatchService {
   ) {}
 
   async getMatches(id1: number, id2: number): Promise<object> {
-    const player1 = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
-    const player2 = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
+    const player1wins = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
+    const player2wins = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
 
-    return JSON.parse(`{"player1": ${player1}, "player2": ${player2}}`);
+    return JSON.parse(`
+    {
+      "${id1}": {
+        "id": ${id1},
+        "wins": ${player1wins}
+      },
+      "${id2}": {
+        "id": ${id2},
+        "wins": ${player2wins}
+    }}`);
   }
 
   async saveMatch(data: any): Promise<Match> {
