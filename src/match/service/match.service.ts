@@ -14,7 +14,7 @@ export class MatchService {
     const player1wins = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
     const player2wins = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
 
-    return {player1: {id: id1, wins: player1wins}, player2: {id: id2, wins: player2wins}};
+    return {player1: {id: +id1, wins: player1wins}, player2: {id: +id2, wins: player2wins}};
   }
 
   async saveMatch(data: any): Promise<Match> {
@@ -32,6 +32,6 @@ export class MatchService {
     if (page > pageCount) {page = pageCount; }
     const data = matches.slice(page * 10 - 10, page * 10);
 
-    return await {page, pageCount, data};
+    return await {page: +page, pageCount, data};
   }
 }
