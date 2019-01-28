@@ -14,6 +14,6 @@ export class MatchController {
 
   @Post()
   async saveMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
-    return this.matchService.saveMatch(createMatchDto);
+    return this.matchService.saveMatch(createMatchDto.body);
   }
 }
