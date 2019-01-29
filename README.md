@@ -12,3 +12,5 @@ This is the backend for the game Game of drones, a digital two-player Rock, Pape
 - run `npm run start:dev` or `yarn run start:dev` to run all the migrations on the DB.
 
 Server will be running on localhost:3000 by default.
+
+P.S: Unit tests run with `yarn run test` or `npm run test` command.
