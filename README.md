@@ -5,11 +5,11 @@ This is the backend for the game Game of drones, a digital two-player Rock, Pape
 ## How to make it work
 
 - Clone or download this repo.
-- navigate to te folder `cd GoD-backend`.
+- navigate to the folder `cd GoD-backend`.
 - use `npm install` or `yarn` to install dependencies.
 - Create the database schema manually.
 - Edit `ormconfig.json` file according to your database configuration.
-- run `npm run start:dev` or `yarn run start:dev` to run all the migrations on the DB.
+- run `npm run start:dev` or `yarn run start:dev` to run all the migrations on the DB and start running the server.
 
 Server will be running on localhost:3000 by default.
 
