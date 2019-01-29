@@ -22,10 +22,13 @@ export class MatchService {
   }
 
   async getDetailedMatches(id1: number, id2: number, page: number): Promise<object> {
-    const matches = await this.matchRepository.find({ where: [
-      { winnerPlayer: id1, loserPlayer: id2 },
-      { winnerPlayer: id2, loserPlayer: id1 },
-    ]});
+    const matches = await this.matchRepository.find({
+      where: [
+        { winnerPlayer: id1, loserPlayer: id2 },
+        { winnerPlayer: id2, loserPlayer: id1 },
+      ],
+      relations: ['winnerPlayer', 'loserPlayer'],
+    });
 
     const pageCount = Math.ceil(matches.length / 10);
     if (!page) { page = 1; }
