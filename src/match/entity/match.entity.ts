@@ -7,10 +7,10 @@ export class Match {
   id: number;
 
   @ManyToOne(type => Player, player => player.id)
-  winnerPlayer: Player;
+  winnerPlayer: number;
 
   @ManyToOne(type => Player, player => player.id)
-  loserPlayer: Player;
+  loserPlayer: number;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
