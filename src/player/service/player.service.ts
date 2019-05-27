@@ -12,7 +12,8 @@ export class PlayerService {
   ) {}
 
   // TODO: Relations?
-  async findPlayer(query: any): Promise<Player> {
+  // TODO: If not user then create?
+  async findPlayer(query: CreatePlayerDto): Promise<Player> {
     return await this.playerModel
       .findOne({ firstName: query.firstName, lastName: query.lastName })
       .exec();
