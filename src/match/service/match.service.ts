@@ -1,28 +1,43 @@
-import { Match } from './../entity/match.entity';
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Match } from '../interfaces/match.interface';
+import { CreateMatchDto } from '../dto/create-match.dto';
 
 @Injectable()
 export class MatchService {
   constructor(
-    @InjectRepository(Match)
-    private readonly matchRepository: Repository<Match>,
+    @InjectModel('Match')
+    private readonly matchModel: Model<Match>,
   ) {}
 
   async getMatches(id1: number, id2: number): Promise<object> {
-    const player1wins = await this.matchRepository.count({where: {winnerPlayer: id1, loserPlayer: id2}});
-    const player2wins = await this.matchRepository.count({where: {winnerPlayer: id2, loserPlayer: id1}});
+    const player1wins = await this.matchModel.count({
+      winnerPlayer: id1,
+      loserPlayer: id2,
+    });
+    const player2wins = await this.matchModel.count({
+      winnerPlayer: id2,
+      loserPlayer: id1,
+    });
 
-    return {player1: {id: +id1, wins: player1wins}, player2: {id: +id2, wins: player2wins}};
+    return {
+      player1: { id: +id1, wins: player1wins },
+      player2: { id: +id2, wins: player2wins },
+    };
   }
 
-  async saveMatch(data: any): Promise<Match> {
-    return await this.matchRepository.save(data);
+  async saveMatch(createMatchDto: CreateMatchDto): Promise<Match> {
+    const newMatch = new this.matchModel(createMatchDto);
+    return await newMatch.save();
   }
 
-  async getDetailedMatches(id1: number, id2: number, page: number): Promise<object> {
-    const matches = await this.matchRepository.find({
+  async getDetailedMatches(
+    id1: number,
+    id2: number,
+    page: number,
+  ): Promise<object> {
+    const matches = await this.matchModel.find({
       where: [
         { winnerPlayer: id1, loserPlayer: id2 },
         { winnerPlayer: id2, loserPlayer: id1 },
@@ -31,10 +46,14 @@ export class MatchService {
     });
 
     const pageCount = Math.ceil(matches.length / 10);
-    if (!page) { page = 1; }
-    if (page > pageCount) {page = pageCount; }
+    if (!page) {
+      page = 1;
+    }
+    if (page > pageCount) {
+      page = pageCount;
+    }
     const data = matches.slice(page * 10 - 10, page * 10);
 
-    return await {page: +page, pageCount, data};
+    return await { page: +page, pageCount, data };
   }
 }
