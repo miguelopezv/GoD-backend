@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Player } from '../entity/player.entity';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Player } from '../interfaces';
+import { CreatePlayerDto } from '../dto';
 
 @Injectable()
 export class PlayerService {
   constructor(
-    @InjectRepository(Player)
-    private readonly playerRepository: Repository<Player>,
+    @InjectModel('Player')
+    private readonly playerModel: Model<Player>,
   ) {}
 
+  // TODO: Relations?
   async findPlayer(query: any): Promise<Player> {
-    return await this.playerRepository.findOne({where: {firstName: query.firstName, lastName: query.lastName},
-      relations: ['wonMatches', 'losedMatches'],
-    });
+    return await this.playerModel
+      .findOne({ firstName: query.firstName, lastName: query.lastName })
+      .exec();
   }
 
-  async save(data: any): Promise<Player> {
-    return await this.playerRepository.save(data);
+  async save(createPlayerDto: CreatePlayerDto): Promise<Player> {
+    const newPlayer = new this.playerModel(createPlayerDto);
+    return await newPlayer.save();
   }
 }

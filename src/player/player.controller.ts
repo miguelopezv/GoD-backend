@@ -1,7 +1,7 @@
-import { Player } from './entity/player.entity';
-import { PlayerService } from './service/player.service';
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
-import { CreatePlayerDto } from './dto/player.dto';
+import { Player } from './interfaces';
+import { PlayerService } from './service/player.service';
+import { CreatePlayerDto } from './dto/create-player.dto';
 
 @Controller('player')
 export class PlayerController {
