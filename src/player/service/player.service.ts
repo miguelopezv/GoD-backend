@@ -23,10 +23,10 @@ export class PlayerService {
     if (!player) {
       return await this.save(body);
     } else {
-      const usuario = player;
-      usuario.games = await this._getGames(player);
-      // TODO: Games missing
-      return usuario;
+      const games = await this._getGames(player);
+      player.games = games;
+      // TODO: Not returning games
+      return player;
     }
   }
 
