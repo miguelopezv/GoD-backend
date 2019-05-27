@@ -24,6 +24,8 @@
     "@nestjs/core": "^5.4.0",
     "@nestjs/mongoose": "^6.1.2",
     "@types/mongoose": "^5.5.3",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.9.1",
     "fastify": "^1.13.4",
     "fastify-formbody": "^2.1.0",
     "mongoose": "^5.5.11",
