@@ -10,5 +10,6 @@ import { MatchSchema } from './schemas/match.schema';
   ],
   controllers: [MatchController],
   providers: [MatchService],
+  exports: [MatchService],
 })
 export class MatchModule {}
