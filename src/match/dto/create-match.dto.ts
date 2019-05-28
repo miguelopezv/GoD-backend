@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateMatchDto {
   @IsNotEmpty()
-  @IsNumber()
-  readonly winnerPlayerId: number;
+  @IsString()
+  readonly winnerPlayerId: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  readonly loserPlayerId: number;
+  @IsString()
+  readonly loserPlayerId: string;
 }
