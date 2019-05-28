@@ -1,19 +1,16 @@
-import { Player } from './entity/player.entity';
+import { Controller, Post, Body } from '@nestjs/common';
+import { Player } from './interfaces';
 import { PlayerService } from './service/player.service';
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
-import { CreatePlayerDto } from './dto/player.dto';
+import { CreatePlayerDto } from './dto/create-player.dto';
 
 @Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
-  @Get()
-  async find(@Query() query): Promise<Player> {
-    return this.playerService.findPlayer(query);
-  }
-
   @Post()
-  async create(@Body() createPlayerDto: CreatePlayerDto): Promise<Player> {
-    return this.playerService.save(createPlayerDto);
+  async findOrCreate(
+    @Body() createPlayerDto: CreatePlayerDto,
+  ): Promise<Player> {
+    return this.playerService.findOrCreatePlayer(createPlayerDto);
   }
 }

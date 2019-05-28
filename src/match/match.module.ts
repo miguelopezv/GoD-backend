@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 import { MatchController } from './match.controller';
 import { MatchService } from './service/match.service';
-import { Match } from './entity/match.entity';
+import { MatchSchema } from './schemas/match.schema';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Match])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Match', schema: MatchSchema }]),
+  ],
   controllers: [MatchController],
   providers: [MatchService],
+  exports: [MatchService],
 })
 export class MatchModule {}
