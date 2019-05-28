@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Match, MatchReport } from '../interfaces';
 import { CreateMatchDto, GetMatchDetailsDto } from '../dto';
-import { MatchReportDetails } from '../interfaces/match-report-detail';
+import { MatchReportDetails } from '../interfaces';
 
 @Injectable()
 export class MatchService {
@@ -38,8 +38,8 @@ export class MatchService {
   async getDetailedMatches(
     query: GetMatchDetailsDto,
   ): Promise<MatchReportDetails> {
-    const { id1, id2, page } = query;
-    let currentPage: number;
+    const { id1, id2 } = query;
+    let { page: currentPage = 1 } = query;
 
     const matches = await this.matchModel
       .find({
@@ -58,10 +58,7 @@ export class MatchService {
 
     const pageCount = Math.ceil(matches.length / 10);
 
-    if (!page) {
-      currentPage = 1;
-    }
-    if (+page > pageCount) {
+    if (+currentPage > pageCount) {
       currentPage = pageCount;
     }
 

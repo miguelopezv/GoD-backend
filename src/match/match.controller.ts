@@ -12,15 +12,15 @@ export class MatchController {
     return this.matchService.getMatches(query);
   }
 
-  @Post()
-  async saveMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
-    return this.matchService.saveMatch(createMatchDto);
-  }
-
   @Get('detail')
   async matchesDetail(
     @Query() query: GetMatchDetailsDto,
   ): Promise<MatchReportDetails> {
     return this.matchService.getDetailedMatches(query);
+  }
+
+  @Post()
+  async saveMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
+    return this.matchService.saveMatch(createMatchDto);
   }
 }
