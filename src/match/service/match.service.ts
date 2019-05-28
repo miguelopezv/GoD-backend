@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Match, MatchReport } from '../interfaces';
 import { CreateMatchDto, GetMatchDetailsDto } from '../dto';
 import { MatchReportDetails } from '../interfaces';
+import { GameReport } from 'src/player/interfaces';
 
 @Injectable()
 export class MatchService {
@@ -65,5 +66,14 @@ export class MatchService {
     const data = matches.slice(currentPage * 10 - 10, currentPage * 10);
 
     return { currentPage, pageCount, data };
+  }
+
+  async getGames(playerId: number): Promise<GameReport> {
+    const wonGames = await this.matchModel.find({ winnerPlayerId: playerId });
+    const losedGames = await this.matchModel.find({
+      loserPlayerId: playerId,
+    });
+
+    return { wonGames, losedGames };
   }
 }
