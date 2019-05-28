@@ -14,18 +14,19 @@ export class PlayerService {
     private readonly matchModel: Model<Match>,
   ) {}
 
-  async findOrCreatePlayer(body: CreatePlayerDto): Promise<Player> {
+  async findOrCreatePlayer(body: CreatePlayerDto): Promise<any> {
     const { firstName, lastName } = body;
+
     const player = await this.playerModel
       .findOne({ firstName, lastName })
+      .lean()
       .exec();
 
     if (!player) {
       return await this.save(body);
     } else {
-      const games = await this._getGames(player);
-      player.games = games;
-      // TODO: Not returning games
+      player.games = await this._getGames(player);
+
       return player;
     }
   }
@@ -36,12 +37,10 @@ export class PlayerService {
   }
 
   private async _getGames(player: Player): Promise<GameReport> {
-    const wonGames = await this.matchModel
-      .find({ winnerPlayerId: player._id })
-      .exec();
-    const losedGames = await this.matchModel
-      .find({ loserPlayerId: player._id })
-      .exec();
+    const wonGames = await this.matchModel.find({ winnerPlayerId: player._id });
+    const losedGames = await this.matchModel.find({
+      loserPlayerId: player._id,
+    });
 
     return { wonGames, losedGames };
   }
