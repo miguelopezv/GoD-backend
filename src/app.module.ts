@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PlayerModule } from './player/player.module';
-import { MatchModule } from './match/match.module';
+import { PlayerModule } from './players/players.module';
+import { MatchModule } from './games/game.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/game', {
-      useNewUrlParser: true,
-    }),
+    MongooseModule.forRoot('mongodb://localhost/game'),
     PlayerModule,
     MatchModule,
   ],

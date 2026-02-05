@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PlayerService } from './player.service';
+import { PlayerService } from './players.service';
 import { PlayerRepository } from '../mocks/player.repository';
 import { Player } from '../entity/player.entity';
 

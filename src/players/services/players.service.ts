@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Player } from '../interfaces';
-import { CreatePlayerDto } from '../dto';
-import { MatchService } from 'src/match/service';
+import { Player } from '../interfaces/player.interface';
+import { CreatePlayerDto } from '../dto/create-player.dto';
+import { GameService } from 'src/games/services/games.service';
 
 @Injectable()
 export class PlayerService {
   constructor(
     @InjectModel('Player')
     private readonly playerModel: Model<Player>,
-    private matchService: MatchService,
+    private gameService: GameService,
   ) {}
 
   async findOrCreatePlayer(body: CreatePlayerDto): Promise<Player> {
@@ -24,7 +24,7 @@ export class PlayerService {
     if (!player) {
       return await this.save(body);
     } else {
-      player.games = await this.matchService.getGames(player._id);
+      // player.games = await this.matchService.findWinners(player._id);
 
       return player;
     }

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PlayerController } from './player.controller';
-import { PlayerService } from './service/player.service';
-import { PlayerSchema } from './schemas/';
-import { MatchModule } from 'src/match/match.module';
+import { PlayerController } from './players.controller';
+import { PlayerService } from './services/players.service';
+import { PlayerSchema } from './schemas/player.schema';
+import { MatchModule } from 'src/games/game.module';
 
 @Module({
   imports: [

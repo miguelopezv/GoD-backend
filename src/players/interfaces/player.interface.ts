@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { Match } from 'src/match/interfaces';
+import { Match } from 'src/games/interfaces';
 
 export interface Player extends Document {
   readonly _id: number;
