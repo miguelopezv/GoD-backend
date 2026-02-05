@@ -16,21 +16,21 @@ export class GameService {
 
   async findWinners(): Promise<Game[]> {
     const result = await this.matchModel.aggregate([
-    {
-      $group: {
-        _id: "$winner",
-        wins: { $sum: 1 }
-      }
-    },
-    {
-      $project: {
-        _id: 0,
-        id: "$_id",
-        wins: 1
-      }
-    }
-  ]);
-  return result;
+      {
+        $group: {
+          _id: '$winner',
+          wins: { $sum: 1 },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          id: '$_id',
+          wins: 1,
+        },
+      },
+    ]);
+    return result;
   }
 
   // async getTotalGamesById(playerId: string): Promise<GamesReport> {

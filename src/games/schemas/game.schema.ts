@@ -4,5 +4,5 @@ export const GameSchema = new mongoose.Schema({
   players: [Number],
   winnerPlayerId: Number,
   totalSets: Number,
-  createdAt: Date
+  createdAt: Date,
 });

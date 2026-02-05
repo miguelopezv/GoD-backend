@@ -14,10 +14,7 @@ export class PlayerService {
   async findOrCreatePlayer(body: CreatePlayerDto): Promise<Player> {
     const { email } = body;
 
-    const player = await this.playerModel
-      .findOne({ email })
-      .lean()
-      .exec();
+    const player = await this.playerModel.findOne({ email }).lean().exec();
 
     if (!player) {
       return await this.save(body);

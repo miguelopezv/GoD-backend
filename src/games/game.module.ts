@@ -5,9 +5,7 @@ import { GameService } from './services/games.service';
 import { GameSchema } from './schemas/game.schema';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Game', schema: GameSchema }]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: 'Game', schema: GameSchema }])],
   controllers: [GameController],
   providers: [GameService],
   exports: [GameService],

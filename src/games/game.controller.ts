@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Query, Body } from '@nestjs/common';
 import { CreateGameDto, GetMatchDetailsDto } from './dto';
-import { Game, GamesReport  } from './interfaces';
+import { Game, GamesReport } from './interfaces';
 import { GameService } from './services/games.service';
 
 @Controller('game')
