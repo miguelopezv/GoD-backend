@@ -6,10 +6,10 @@ This is the backend for the game Game of drones, a digital two-player Rock, Pape
 
 - Clone or download this repo.
 - navigate to the folder `cd GoD-backend`.
-- use `npm install` or `yarn` to install dependencies.
+- use `npm install` to install dependencies.
 - MongoDB is used as default, You dont need to do any additional config, just make sure mongo is running.
-- run `npm run start:dev` or `yarn start:dev` to start running the server.
+- run `npm run start:dev`  to start running the server.
 
 Server will be running on localhost:3000 by default.
 
-P.S: Unit tests run with `yarn run test` or `npm run test` command.
+P.S: Unit tests run with `npm run test` command.

@@ -1,7 +1,7 @@
 {
   "name": "game-drones",
   "version": "1.0.0",
-  "description": "A paper, rock, scissors game!!",
+  "description": "Backend for a paper, rock, scissors game",
   "author": "Miguel López",
   "license": "MIT",
   "scripts": {
