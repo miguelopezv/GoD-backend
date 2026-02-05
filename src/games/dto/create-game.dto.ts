@@ -2,12 +2,11 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateGameDto {
   @IsNotEmpty()
-  readonly winnerPlayerId: Number;
+  readonly players: [number];
 
   @IsNotEmpty()
-  readonly players: [Number];
+  readonly winnerPlayerId: number;
 
-  readonly totalSets: Number;
-
-  readonly createdAt: Date;
+  @IsNotEmpty()
+  readonly totalSets: number;
 }

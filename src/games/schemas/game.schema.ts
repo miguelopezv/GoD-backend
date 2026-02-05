@@ -1,8 +1,21 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export const GameSchema = new mongoose.Schema({
-  players: [Number],
-  winnerPlayerId: Number,
-  totalSets: Number,
-  createdAt: Date,
-});
+export type GameDocument = HydratedDocument<Game>;
+
+@Schema()
+export class Game {
+  @Prop()
+  players: [number];
+
+  @Prop()
+  winnerPlayerId: number;
+
+  @Prop()
+  totalSets: number;
+
+  @Prop({default: Date.now()})
+  createdAt: Date;
+}
+
+export const GameSchema = SchemaFactory.createForClass(Game);
