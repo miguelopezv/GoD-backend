@@ -1,23 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Player } from '../interfaces/player.interface';
+import { Player } from '../schemas/player.schema';
 import { CreatePlayerDto } from '../dto/create-player.dto';
-import { GameService } from 'src/games/services/games.service';
 
 @Injectable()
 export class PlayerService {
   constructor(
     @InjectModel('Player')
     private readonly playerModel: Model<Player>,
-    private gameService: GameService,
   ) {}
 
   async findOrCreatePlayer(body: CreatePlayerDto): Promise<Player> {
-    const { firstName, lastName } = body;
+    const { email } = body;
 
     const player = await this.playerModel
-      .findOne({ firstName, lastName })
+      .findOne({ email })
       .lean()
       .exec();
 
@@ -25,7 +23,6 @@ export class PlayerService {
       return await this.save(body);
     } else {
       // player.games = await this.matchService.findWinners(player._id);
-
       return player;
     }
   }

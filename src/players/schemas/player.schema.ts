@@ -1,6 +1,12 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export const PlayerSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-});
+export type PlayerDocument = HydratedDocument<Player>;
+
+@Schema()
+export class Player {
+  @Prop({ required: true, unique: true })
+  email: string;
+}
+
+export const PlayerSchema = SchemaFactory.createForClass(Player);

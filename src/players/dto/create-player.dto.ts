@@ -1,11 +1,7 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class CreatePlayerDto {
   @IsNotEmpty()
-  @IsString()
-  readonly firstName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  readonly lastName: string;
+  @IsEmail()
+  readonly email: string;
 }
