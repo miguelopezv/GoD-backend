@@ -1,7 +1,6 @@
-import { Document } from 'mongoose';
-import { Match } from 'src/games/interfaces';
+import { Game } from 'src/games/interfaces';
 
-export interface Player extends Document {
+export interface Player {
   readonly _id: number;
   readonly firstName: string;
   readonly lastName: string;
@@ -9,6 +8,6 @@ export interface Player extends Document {
 }
 
 export interface GameReport {
-  readonly wonGames: Match[];
-  readonly losedGames: Match[];
+  readonly wonGames: Game[];
+  readonly losedGames: Game[];
 }
