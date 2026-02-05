@@ -10,7 +10,6 @@ export class GameService {
 
   async create(createGameDto: CreateGameDto): Promise<Game> {
     const newGame = new this.gameModel(createGameDto);
-    Logger.log("DTO", createGameDto);
     return await newGame.save();
   }
 
